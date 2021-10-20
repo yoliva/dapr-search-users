@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oiga.UserService", "Oiga.UserService.csproj", "{1BB63AC5-4853-4502-A567-2D9132FC4216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oiga.UserService.UnitTests", "..\Oiga.UserService.UnitTests\Oiga.UserService.UnitTests.csproj", "{7724CD97-1B39-4876-9BAE-BAFADF06FCED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BB63AC5-4853-4502-A567-2D9132FC4216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB63AC5-4853-4502-A567-2D9132FC4216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB63AC5-4853-4502-A567-2D9132FC4216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB63AC5-4853-4502-A567-2D9132FC4216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7724CD97-1B39-4876-9BAE-BAFADF06FCED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7724CD97-1B39-4876-9BAE-BAFADF06FCED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7724CD97-1B39-4876-9BAE-BAFADF06FCED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7724CD97-1B39-4876-9BAE-BAFADF06FCED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A60CE0BB-17BD-450D-835E-F5F8EE72F73B}
+	EndGlobalSection
+EndGlobal
