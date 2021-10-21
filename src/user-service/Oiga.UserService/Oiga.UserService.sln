@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oiga.UserService", "Oiga.Us
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oiga.UserService.UnitTests", "..\Oiga.UserService.UnitTests\Oiga.UserService.UnitTests.csproj", "{7724CD97-1B39-4876-9BAE-BAFADF06FCED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oiga.UserService.Data", "..\Oiga.UserService.Data\Oiga.UserService.Data.csproj", "{DC141A54-ABFF-4CA2-B8BC-778F1E982F18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7724CD97-1B39-4876-9BAE-BAFADF06FCED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7724CD97-1B39-4876-9BAE-BAFADF06FCED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7724CD97-1B39-4876-9BAE-BAFADF06FCED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC141A54-ABFF-4CA2-B8BC-778F1E982F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC141A54-ABFF-4CA2-B8BC-778F1E982F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC141A54-ABFF-4CA2-B8BC-778F1E982F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC141A54-ABFF-4CA2-B8BC-778F1E982F18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

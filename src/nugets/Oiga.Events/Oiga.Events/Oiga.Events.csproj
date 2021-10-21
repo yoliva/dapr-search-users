@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>Oiga.Events</PackageId>
+    <Version>2021.10.20.2</Version>
+    <Authors>Yassiel Oliva Carmona</Authors>
+    <Company>S.HI.E.L.D</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+</Project>
