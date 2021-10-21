@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Oiga.Common.Middlewares;
 using Oiga.SearchService.Data;
+using Oiga.SearchService.Services;
 
 namespace Oiga.SearchService
 {
@@ -29,6 +30,8 @@ namespace Oiga.SearchService
             });
 
             services.AddHttpClient();
+
+            services.AddSingleton<IInputTokenizerService, InputTokenizerService>();
 
             services.AddMediatR(typeof(Startup));
 
