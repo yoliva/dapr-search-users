@@ -10,8 +10,8 @@ namespace Oiga.SearchService.Data.Configurations
         {
             builder.HasKey(x => x.ID);
 
-            builder.Property(x => x.FullName).HasMaxLength(64).IsRequired();
-            builder.Property(x => x.Username).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.FullName).HasMaxLength(64).IsRequired().UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            builder.Property(x => x.Username).HasMaxLength(50).IsRequired().UseCollation("SQL_Latin1_General_CP1_CI_AS");
         }
     }
 }

@@ -7,7 +7,9 @@ namespace Oiga.SearchService.Services
     {
         public IEnumerable<string> Tokenize(string input)
         {
-            return Regex.Replace(input, @"", string.Empty).Split(" ");
+            var result = Regex.Replace(input, @"[.,;:?¡¿!-]", string.Empty);
+            result = Regex.Replace(result, @"\w+", " ");
+            return result.Split(" ");
         }
     }
 }
