@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Oiga.Common;
+using Oiga.Common.Exceptions;
+using Oiga.SearchService.Configurations;
 using Oiga.SearchService.Data;
 using Oiga.SearchService.Models;
 using Oiga.SearchService.Services;
@@ -34,19 +37,27 @@ namespace Oiga.SearchService.v1.Requests
 
         public async Task<PaginatedResult<UserDto>> Handle(SearchUserRequest request, CancellationToken cancellationToken)
         {
+            logger.LogInformation($"Request {nameof(SearchUserRequest)} received");
+
             Validate(request);
 
             var tokens = tokenizer.Tokenize(request.SearchExpression);
 
-            var query = context.UsersData
-                .Where(ud => tokens.Any(t => ud.FullName.Contains(t) || ud.Username.Contains(t)))
-                .OrderBy(ud => ud.FullName)
-                .ThenBy(ud => ud.Username);
+            var query = context.UsersData.AsQueryable();
+
+            //foreach (var token in tokens)
+            //{
+            //    query = query.Where(ud => tokens.Any(token => ud.FullName.Contains(token) || ud.Username.Contains(token)));
+            //}
+
+            query = query.OrderBy(ud => ud.FullName).ThenBy(ud => ud.Username);
 
             var continuationToken = request.ContinuationToken is null ? null : Decode(request.ContinuationToken);
             var response = continuationToken is null
                 ? await query.Take(request.Limit).ToListAsync(cancellationToken)
                 : await query.Skip(continuationToken.SkipCount).Take(continuationToken.Limit).ToListAsync(cancellationToken);
+
+            logger.LogInformation($"Request {nameof(SearchUserRequest)} completed");
 
             return new PaginatedResult<UserDto>
             {
@@ -61,7 +72,8 @@ namespace Oiga.SearchService.v1.Requests
 
         private void Validate(SearchUserRequest request)
         {
-            throw new NotImplementedException();
+            if (request.Limit <= 0 || request.Limit > SearchConstants.MAX_USERS_RESULT)
+                throw new BadRequestExcpetion((int)ErrorCode.InvalidRequestReceived, $"Invalid {nameof(request.Limit)}");
         }
     }
 }

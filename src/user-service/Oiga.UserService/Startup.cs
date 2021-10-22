@@ -57,12 +57,12 @@ namespace Oiga.UserService
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseCors(options =>
             {
-                options.AllowAnyMethod().AllowAnyHeader().WithOrigins("");
+                options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
             });
+
+            app.UseAuthorization();
 
             app.UseCloudEvents();
 

@@ -52,10 +52,10 @@ namespace Oiga.UserService.v1.Requests
             await context.AddAsync(usr, cancellationToken);
             await context.SaveChangesAsync();
 
-            await client.PublishEventAsync(
-                pubsubName: brokerConfig.Value.PubSubName, topicName: Topics.UserCreated,
-                data: usr, cancellationToken: cancellationToken
-            );
+            //await client.PublishEventAsync(
+            //    pubsubName: brokerConfig.Value.PubSubName, topicName: Topics.UserCreated,
+            //    data: usr, cancellationToken: cancellationToken
+            //);
 
             return UserDataDto.FromUser(usr);
         }

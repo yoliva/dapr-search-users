@@ -62,7 +62,7 @@ namespace Oiga.SearchService
 
             app.UseCors(options =>
             {
-                options.AllowAnyMethod().AllowAnyHeader().WithOrigins("");
+                options.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
             });
 
             app.UseAuthorization();

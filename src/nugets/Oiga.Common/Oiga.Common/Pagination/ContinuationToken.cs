@@ -2,7 +2,7 @@
 {
     public class ContinuationToken
     {
-        public int SkipCount { get; internal set; }
-        public int Limit { get; internal set; }
+        public int SkipCount { get; set; }
+        public int Limit { get; set; }
     }
 }

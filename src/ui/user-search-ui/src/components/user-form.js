@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 
 const UserForm = (props) => {
   const [user, setUser] = useState({
-    firstName: props.book ? props.user.firstName : '',
-    lastName: props.book ? props.user.lastName : '',
-    username: props.book ? props.user.username : '',
+    firstName: props.user ? props.user.firstName : "",
+    lastName: props.user ? props.user.lastName : "",
+    username: props.user ? props.user.username : "",
   });
 
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
   const { firstName, lastName, username } = user;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
     const values = [firstName, lastName, username];
-    let errorMsg = '';
+    let errorMsg = "";
 
     const allFieldsFilled = values.every((field) => {
       const value = `${field}`.trim();
-      return value !== '' && value !== '0';
+      return value !== "" && value !== "0";
     });
 
     if (allFieldsFilled) {
@@ -29,24 +29,24 @@ const UserForm = (props) => {
       };
       props.handleOnSubmit(user);
     } else {
-      errorMsg = 'Please fill out all the fields.';
+      errorMsg = "Please fill out all the fields.";
     }
     setErrorMsg(errorMsg);
   };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-        setUser((prevState) => ({
-          ...prevState,
-          [name]: value
-        }));
-    };
+    setUser((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   return (
     <div className="main-form">
       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
       <Form onSubmit={handleOnSubmit}>
-      <Form.Group controlId="firstName">
+        <Form.Group controlId="firstName">
           <Form.Label>First Name</Form.Label>
           <Form.Control
             className="input-control"

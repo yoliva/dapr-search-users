@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>Oiga.Common</PackageId>
-    <Version>2021.10.21.1</Version>
+    <Version>2021.10.21.4</Version>
     <Authors>Yassiel Oliva Carmona</Authors>
     <Company>S.HI.E.L.D</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
