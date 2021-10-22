@@ -45,10 +45,10 @@ namespace Oiga.SearchService.v1.Requests
 
             var query = context.UsersData.AsQueryable();
 
-            //foreach (var token in tokens)
-            //{
-            //    query = query.Where(ud => tokens.Any(token => ud.FullName.Contains(token) || ud.Username.Contains(token)));
-            //}
+            foreach (var token in tokens)
+            {
+                query = query.Where(ud => ud.FullName.Contains(token) || ud.Username.Contains(token));
+            }
 
             query = query.OrderBy(ud => ud.FullName).ThenBy(ud => ud.Username);
 

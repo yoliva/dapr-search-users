@@ -4,7 +4,7 @@ metadata:
   name: usr-subscription
 spec:
   topic: User_Created
-  route: /listen
+  route: /dapr/subscribe
   pubsubname: pubsub
 scopes:
-  - user-search-service
+  - search-service

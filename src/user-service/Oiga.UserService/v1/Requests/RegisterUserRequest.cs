@@ -54,11 +54,11 @@ namespace Oiga.UserService.v1.Requests
 
             logger.LogInformation($"Attempt to persist user to DB. Id:{usr.ID}");
             await context.AddAsync(usr, cancellationToken);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
 
             var client = factory.CreateClient();
             var content = new StringContent(JsonConvert.SerializeObject(usr), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync($"{brokerConfig.Value.Uri}/{brokerConfig.Value.Topic}", content);
+            var response = await client.PostAsync($"{brokerConfig.Value.Uri}/{brokerConfig.Value.Topic}", content, cancellationToken);
             
             logger.LogInformation($"Event published with {response.StatusCode} status response");
 
