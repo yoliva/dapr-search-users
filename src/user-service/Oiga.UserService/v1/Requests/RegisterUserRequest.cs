@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using Oiga.Common;
 using Oiga.UserService.Configurations;
 using Microsoft.Extensions.Options;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Oiga.UserService.v1.Requests
 {
@@ -23,14 +26,15 @@ namespace Oiga.UserService.v1.Requests
     public class RegisterUserRequestHandler : IRequestHandler<RegisterUserRequest, UserDataDto>
     {
         private readonly UsersServiceDbContext context;
+        private readonly IHttpClientFactory factory;
         private readonly DaprClient client;
         private readonly IOptions<MessageBrokerConfig> brokerConfig;
         private readonly ILogger<RegisterUserRequest> logger;
 
-        public RegisterUserRequestHandler(UsersServiceDbContext context, DaprClient client, IOptions<MessageBrokerConfig> brokerConfig, ILogger<RegisterUserRequest> logger)
+        public RegisterUserRequestHandler(UsersServiceDbContext context, IHttpClientFactory factory, IOptions<MessageBrokerConfig> brokerConfig, ILogger<RegisterUserRequest> logger)
         {
             this.context = context;
-            this.client = client;
+            this.factory = factory;
             this.brokerConfig = brokerConfig;
             this.logger = logger;
         }
@@ -52,10 +56,11 @@ namespace Oiga.UserService.v1.Requests
             await context.AddAsync(usr, cancellationToken);
             await context.SaveChangesAsync();
 
-            //await client.PublishEventAsync(
-            //    pubsubName: brokerConfig.Value.PubSubName, topicName: Topics.UserCreated,
-            //    data: usr, cancellationToken: cancellationToken
-            //);
+            var client = factory.CreateClient();
+            var content = new StringContent(JsonConvert.SerializeObject(usr), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync($"{brokerConfig.Value.Uri}/{brokerConfig.Value.Topic}", content);
+            
+            logger.LogInformation($"Event published with {response.StatusCode} status response");
 
             return UserDataDto.FromUser(usr);
         }

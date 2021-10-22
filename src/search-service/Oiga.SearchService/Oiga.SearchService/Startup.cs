@@ -1,14 +1,19 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Oiga.Common.Middlewares;
+using Oiga.Events.Enums;
 using Oiga.SearchService.Data;
 using Oiga.SearchService.Services;
+using System.Text;
 
 namespace Oiga.SearchService
 {
@@ -28,6 +33,8 @@ namespace Oiga.SearchService
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddHttpClient();
 
             services.AddHttpClient();
 
@@ -71,8 +78,20 @@ namespace Oiga.SearchService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapSubscribeHandler();
                 endpoints.MapControllers();
+                endpoints.MapGet("/dapr/subscribe", async context =>
+                {
+                    var logger = context.RequestServices.GetService<ILogger<Startup>>();
+                    
+                    logger.LogInformation("Subscribe endpoint called by Pubsub");
+
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new
+                    {
+                        topic = Topics.UserCreated,
+                        route = "/api/v1/daprevents/listen-user-events/",
+                        pubsubname = "pubsub"
+                    }), Encoding.UTF8);
+                });
             });
         }
     }
